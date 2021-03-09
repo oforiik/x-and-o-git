@@ -7,13 +7,6 @@
     --mark-size: calc(var(--cell-size) * .86);
 }
 
-.title {
-    font-family: 'Fira Code SemiBold', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: rgb(6, 30, 138);
-    font-size: 50px;
-    text-align: center;
-}
-
 body {
     margin: 0px;
     background-color: rgb(0, 0, 0);
@@ -38,6 +31,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    cursor:pointer;
 }
 
 .cell:first-child,
@@ -60,40 +54,100 @@ body {
     border-bottom: none;
 }
 
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
+}
+
 .cell.x::before,
-.cell.x::after {
+.cell.x::after,
+.cell.o::before {
+    background-color: rgb(6, 30, 138);
+}
+
+.board.x .cell:not(.o):not(.x):hover::before, 
+.board.x .cell:not(.o):not(.x):hover::after,
+.board.o .cell:not(.o):not(.x):hover::before{
+    background-color: rgb(102, 196, 233);
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.o):not(.x):hover::before, 
+.board.x .cell:not(.o):not(.x):hover::after {
     content: '';
     position: absolute;
     width: calc(var(--mark-size) * .15);
     height: var(--mark-size);
-    background-color: rgb(6, 30, 138);
 }
 
-.cell.x::after {
+.cell.x::after,
+.board.x .cell:not(.o):not(.x):hover::after {
     transform: rotate(45deg);
 }
 
-.cell.x::before {
+.cell.x::before, 
+.board.x .cell:not(.o):not(.x):hover::before {
     transform: rotate(-45deg);
 }
 
 .cell.o::before,
-.cell.o::after {
+.cell.o::after,
+.board.o .cell:not(.o):not(.x):hover::before, 
+.board.o .cell:not(.o):not(.x):hover::after {
     content: '';
     position: absolute;
     border-radius: 50%;
 }
 
-.cell.o::before {
-    background-color: rgb(6, 30, 138);
+.cell.o::before,
+.board.o .cell:not(.o):not(.x):hover::before {
     width: var(--mark-size);
     height: var(--mark-size);
 }
 
-.cell.o::after {
+.board.o .cell:not(.o):not(.x):hover::before {
+    background-color: rgb(102, 196, 233);
+}
+
+.cell.o::after, 
+.board.o .cell:not(.o):not(.x):hover::after {
     width: calc(var(--mark-size) * .69);
     height: calc(var(--mark-size) * .69);
     background-color:  rgb(0, 0, 0);
 }
 
+.winning-message {
+    display: none;
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    font-size: 3rem;
+    font-family: 'Fira code', Courier, monospace;
+    flex-direction: column;
 
+}
+
+.winning-message button {
+    font-size: 3rem;
+    background-color: rgb(23, 149, 223);
+    border: 1px solid rgb(9, 129, 199);
+    padding: .25em .5em;
+    cursor: pointer;
+}
+
+.winning-message button:hover {
+    background-color: rgb(24, 133, 195);
+    border-color: 1px solid rgb(14, 83, 122);
+    color: white;
+}
+
+
+.winning-message.show {
+    display: flex;
+}
