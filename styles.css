@@ -139,6 +139,7 @@ body {
     border: 1px solid rgb(9, 129, 199);
     padding: .25em .5em;
     cursor: pointer;
+    border-radius: .12em;
 }
 
 .winning-message button:hover {
